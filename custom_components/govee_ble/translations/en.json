@@ -1,0 +1,31 @@
+{
+    "config": {
+        "step": {
+        "user": {
+            "title": "Configure Your Smart Light",
+            "description": "Please enter your smart light setup details.",
+            "data": {
+            "mac_address": "MAC Address",
+            "name": "Device Name",
+            "initial_brightness": "Initial Brightness",
+            "initial_color": "Initial Color (RGB)"
+            }
+        }
+        },
+        "error": {
+        "invalid_mac": "The MAC address is invalid. Please enter a valid MAC address."
+        }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Options for Smart Light"
+        }
+      }
+    },
+    "system_health": {
+      "info": {
+        "version": "Version"
+      }
+    }
+  }

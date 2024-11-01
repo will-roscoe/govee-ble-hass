@@ -1,0 +1,4 @@
+smart_light:
+  - platform: smart_light
+    mac_address: "AA:BB:CC:DD:EE:FF"
+    name: "Living Room Light"

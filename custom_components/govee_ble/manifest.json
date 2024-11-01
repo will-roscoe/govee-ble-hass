@@ -1,0 +1,9 @@
+{
+    "domain": "ble_light",
+    "name": "Govee BLE Light",
+    "version": "1.0",
+    "documentation": "https://www.example.com/",
+    "dependencies": [],
+    "codeowners": ["@will-roscoe"],
+    "requirements": ["pygatt"]
+  }

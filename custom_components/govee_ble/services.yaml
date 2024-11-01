@@ -1,0 +1,11 @@
+smart_light.turn_on:
+  description: Turn on the smart light
+  fields:
+    brightness:
+      description: Set the brightness value
+      example: 255
+    rgb_color:
+      description: RGB color triplet
+      example: [255, 255, 255]
+smart_light.turn_off:
+  description: Turn off the smart light
