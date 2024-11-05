@@ -1,4 +1,4 @@
-name: Run tests and upload coverage
+name: Tests (Codecov)
 
 on: 
   push
@@ -13,14 +13,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
 
       - name: Install dependencies
-        run: pip install pytest pytest-cov
+        run: npm install
 
       - name: Run tests
-        run: pytest --cov --cov-report=xml
+        run: npx jest --coverage
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
