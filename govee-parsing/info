@@ -1,0 +1,142 @@
+H6053
+Service	000102030405060708090a0b0c0d1910	00010203-0405-0607-0809-0a0b0c0d1910
+Characteristic	000102030405060708090a0b0c0d2b11	00010203-0405-0607-0809-0a0b0c0d2b11
+KEEP ALIVE              0xAA,   0x33,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x99
+
+
+                        0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18         
+                        ID,     DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   DATA,   CHECK
+Default                 0x33                                                                                                            0x00,   0x00,   0x00    0x00    XOR
+POWER                           0x33,   PWR,    0x01,
+    Both off	                        0x00
+    Both on	                            0x11
+    Left on right off	                0x10
+    Left off right on	                0x01
+
+Color                           0x05,   0x15,   0x01,   rr,     gg,     bb,     B1,     B2,     B3,     B4,     B5,     SEG1,   SEG2,                                                                                  
+    RGB                                                 rr,     gg,     bb,     0x00,   0x00,   0x00,   0x00,   0x00,                   
+    TEMP                                                0xFF,   0xFF,   0xFF,   B1,     B2,     B3,     B4,     B5,                  
+        Warm White                                                              0x07,   0xd0,   0xff,   0x89,   0x12,   
+        Cool White                                                              0x23,   0x28,   0xd9,   0xe1,   0xff, 
+
+Brightness                      0x05,   0x15,   0x02,   PERC,   SEG,    SEG2,   0x00,   0x00,   0x00    0x00    0x00,   0x00,   0x00,
+
+
+H6072
+Service	000102030405060708090a0b0c0d1910	00010203-0405-0607-0809-0a0b0c0d1910
+Characteristic	000102030405060708090a0b0c0d2b11	00010203-0405-0607-0809-0a0b0c0d2b11
+Keep Alive	            33      01      01      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      33	Send every second.
+On	                    33      01      01      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      33	
+Off	                    33      01      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      32	
+Switch to:
+    color mode	        33      05      15      01      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      22	TODO: test out switching colors w/ and w/o gradients.
+    scene mode	        33      05      04      05      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      37	Switches to last scene set by user via app.
+scenes    
+    Nightlight	        33      05      04      02      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      30
+    Romantic	        33      05      04      07      00      00      00      00      00      00      00      00      00      00      00      00      00      00      00      35
+
+
+
+H6113
+Service	000102030405060708090a0b0c0d1910	00010203-0405-0607-0809-0a0b0c0d1910
+Characteristic	000102030405060708090a0b0c0d2b11	00010203-0405-0607-0809-0a0b0c0d2b11
+KEEPALIVE               0xAA,   0x01,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0xAB
+COLOR                   0x33,   0x05,   0x02,   RED,    GREEN,  BLUE,   0x00,   0xFF,   0xAE,   0x54,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   (0x31 ^ RED ^ GREEN ^ BLUE)
+BRIGHTNESS              0x33,   0x04,   BRIGHTN,0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   (0x33 ^ 0x04 ^ BRIGHTNESS)
+QUERY                   0x81,   0x8a,   0x8b,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   CHECKSUM
+    RESPONSE
+        0: ???
+        1: ???
+        2: on == 0x23
+        3: mode (see modes)
+        4: ???
+        5: speed
+        6: red
+        7: green
+        8: blue
+        9: ww
+        10: firmware version??? Was 7 when firmware was 7, and 9 when firmware was 9.
+        11: cw
+        12: ???
+        13: Checksum?
+MODES
+    0x25 -> seven_color_cross_fade
+    0x26 -> red_gradual_change
+    0x27 -> green_gradual_change
+    0x28 -> blue_gradual_change
+    0x29 -> yellow_gradual_change
+    0x2a -> cyan_gradual_change
+    0x2b -> purple_gradual_change
+    0x2c -> white_gradual_change
+    0x2d -> red_green_cross_fade
+    0x2e -> red_blue_cross_fade
+    0x2f -> green_blue_cross_fade
+    0x30 -> seven_color_strobe_flash
+    0x31 -> red_strobe_flash
+    0x32 -> green_strobe_flash
+    0x33 -> blue_stobe_flash
+    0x34 -> yellow_strobe_flash
+    0x35 -> cyan_strobe_flash
+    0x36 -> purple_strobe_flash
+    0x37 -> white_strobe_flash
+    0x38 -> seven_color_jumping
+    0x61 -> color
+    0x62 -> special
+    0x60 -> custom
+
+
+
+H6127
+Service	000102030405060708090a0b0c0d1910	00010203-0405-0607-0809-0a0b0c0d1910
+Characteristic	000102030405060708090a0b0c0d2b11	00010203-0405-0607-0809-0a0b0c0d2b11
+                        0x33: Indicator
+                                0x01: power
+                                        0x00: Off
+                                        0x01: On
+                                0x04: brightness
+                                        0x00: 0% (also Off)
+                                        0x14: 1%
+                                        0xfe: 100%
+                                0x05: color
+                                        0x02: Manual
+                                                red,    green,  blue
+                                        0x01: music
+                                                0x00: Energic
+                                                0x01: Spectrum(colors)
+                                                        0x00,   red,    green,  blue
+                                                0x02: Rolling(colors)
+                                                        0x00,   red,    green,  blue
+                                                0x03: Rhythm
+                                        0x04: Scene
+                                                0x00: Sunrise
+                                                0x01: Sunset
+                                                0x04: Move
+                                                0x05: Dating
+                                                0x07: Romantic
+                                                0x08: Blinking
+                                                0x09: Candlelight
+                                                0x0f: Snowflake
+                                        0x0a: DIY
+KEEPALIVE   0xAA,   0x01,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0xAB
+ON          0x33,   0x01,   0x01,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x33
+OFF         0x33,   0x01,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x32
+OFF(0%)     0x33,   0x04,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x37
+RGB         0x33,   0x05,   0x02,   RED,    GREEN,  BLUE,   0X00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   XOR
+?TEMP       0x33,   0x05,   0x02,   RED,    GREEN,  BLUE,   0x00,   0xFF,   0xAE,   0x54,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   XOR
+BRIGHTNESS  0x33,   0x04,   BRIGHTN,0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   0x00,   (0x33 ^ 0x04 ^ BRIGHTNESS)
+MUSIC MODES
+33  05  01  00  00  000000000000000000000000000037 = music Energic
+33  05  01  01  00  ff0000  0000000000000000000000c9 = music spectrum(red)
+33  05  01  01  00  0000ff  0000000000000000000000c9 = music spectrum(blue)
+33  05  01  02  00  ff0000  0000000000000000000000ca = music rolling (red)
+33  05  01  02  00  0000ff  0000000000000000000000ca = music rolling (blue)
+33  05  01  03  00  000000000000000000000000000034 = music Rhythm
+SCENE
+33  05  04  00  00000000000000000000000000000032 = Scene(Sunrise)
+33  05  04  01  00000000000000000000000000000033 = Scene(Sunset)
+3305040400000000000000000000000000000036 = Scene(Movie)
+3305040500000000000000000000000000000037 = Scene(Dating)
+3305040700000000000000000000000000000035 = Scene(Romantic)
+330504080000000000000000000000000000003a = Scene(Blinking)
+330504090000000000000000000000000000003b = Scene(Candlelight)
+3305040f0000000000000000000000000000003d = Scene(snowflake)```
