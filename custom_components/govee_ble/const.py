@@ -1,4 +1,1 @@
-DOMAIN = "ble_light"
-DEFAULT_NAME = "Govee BLE Light"
-DEFAULT_BRIGHTNESS = 255
-DEFAULT_RGB_COLOR = (255, 255, 255)
+DOMAIN = "govee_ble"

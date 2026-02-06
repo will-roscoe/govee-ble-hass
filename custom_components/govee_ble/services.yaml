@@ -4,8 +4,12 @@ smart_light.turn_on:
     brightness:
       description: Set the brightness value
       example: 255
+    color_temp:
+      description: Set the color temperature in Kelvin
+      example: 3000
     rgb_color:
       description: RGB color triplet
       example: [255, 255, 255]
+
 smart_light.turn_off:
   description: Turn off the smart light
